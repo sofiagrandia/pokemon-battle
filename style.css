@@ -1,0 +1,1010 @@
+:root {
+    --bg-color: #041b51;
+    --card-border: #f6dc33;
+    --select-border: #f80101;
+    --gray: #767676;
+    --light-gray: #f3f3f3;
+    --normal: #a8a878;
+    --fire: #f08030;
+    --water: #6890f0;
+    --grass: #78c850;
+    --electric: #f8d030;
+    --ice: #98d8d8;
+    --fighting: #c03028;
+    --poison: #a040a0;
+    --ground: #e0c068;
+    --flying: #a890f0;
+    --psychic: #f85888;
+    --bug: #a8b820;
+    --rock: #b8a038;
+    --ghost: #705898;
+    --dark: #705848;
+    --dragon: #7038f8;
+    --steel: #b8b8d0;
+    --fairy: #f0b6bc;
+
+    --normal-dark: #646445;
+    --fire-dark: #a2551e;
+    --water-dark: #445e9b;
+    --grass-dark: #4a7a31;
+    --electric-dark: #90791b;
+    --ice-dark: #608b8b;
+    --fighting-dark: #691b17;
+    --poison-dark: #5a245a;
+    --ground-dark: #66582f;
+    --flying-dark: #675994;
+    --psychic-dark: #9c3755;
+    --bug-dark: #636c13;
+    --rock-dark: #796a26;
+    --ghost-dark: #3f3156;
+    --dark-dark: #2c221b;
+    --dragon-dark: #41218d;
+    --steel-dark: #656577;
+    --fairy-dark: #946b6f;
+    --color1: rgb(0, 231, 255);
+    --color2: rgb(255, 0, 231);
+
+    --hp: #65cc92;
+    --atk: #ac4638;
+    --def: #5dbae2;
+
+    --hp-grad: #c2f484;
+    --atk-grad: #dfb408;
+    --def-grad: #9d75e4;
+
+    --turn-indicator: #008cff;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "VT323";
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--atk);
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+select {
+    width: 170px;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--atk-grad);
+    appearance: none;
+    background-image: url("media/arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    margin-top: 50px;
+}
+
+#status {
+    font-size: 1.5rem;
+    color: var(--bg-color);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+
+    background-image: 
+        radial-gradient(circle at center,
+            #f3f3f3 0%,
+            #000000 0.5%,
+            #f03030 1%,
+            #dff5b0 12%,
+            #b3fcda 18%,
+            #81fae8 22%,
+            #4fc3f7 35%,
+            #0288d1 50%,
+            #01579b 65%,
+            #512da8 80%,
+            #041b51 100%);
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+}
+
+.image-border {
+    position: absolute;
+    transform: translate(-0%, -70%);
+    border: 3px solid var(--card-border, #f6dc33);
+    border-radius: 12px;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-image: linear-gradient(140deg, orange, var(--card-border), yellow, orange, var(--card-border)) 1;
+    z-index: -2;
+}
+
+.card-image {
+    width: 120px;
+    height: 130px;
+    margin: 20px;
+    padding: 0;
+    margin: 0;
+    z-index: 500;
+}
+
+.size-block {
+    font-size: 1vw;
+    width: 9vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    transform: translate(-0%, 140%);
+    margin: 0 auto;
+
+}
+
+.size-block .data {
+    padding: 1px;
+    border: 1px solid var(--bg-color);
+    border-radius: 4px;
+
+}
+
+.data-block {
+
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    transform: translate(0%, 100%);
+    margin: 0 auto;
+
+}
+
+.data-block p {
+    padding: 0px;
+    font-size: 1vw;
+}
+
+.data {
+    padding-right: 4px;
+    margin-right: 4px;
+    margin: 0px;
+}
+
+.pokemon-id {
+    position: absolute;
+    /*top: 50%;
+    left: 50%;*/
+    transform: translate(-0%, 15%);
+    font-size: 9vw;
+    background: transparent;
+    font-weight: bold;
+    z-index: 1;
+    /* ID por debajo de la imagen pero encima del fondo/borde */
+    pointer-events: none;
+    user-select: none;
+    /* Opcional: para que se vea sutil detrás de la imagen */
+}
+
+.turn-indicator {
+    color: var(--turn-indicator);
+    font-weight: bolder;
+    font-style: italic;
+}
+
+
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card {
+    width: 20vw;
+    height: 28vw;
+    max-width: 250px;
+    max-height: 349px;
+    position: relative;
+    perspective: 1000px;
+    border-radius: 17px;
+    padding: 2px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    perspective: 1000px;
+}
+
+.card.selected {
+    border: 4px solid var(--select-border);
+    border-radius: 3px;
+    box-shadow: 0 0 12px var(--select-border);
+}
+
+
+.card-front,
+.card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 17px;
+    backface-visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-front {
+    background: #fff;
+    z-index: 2;
+    align-items: center;
+}
+
+.card-back {
+    background-image: url('media/back.png');
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+/* Efecto holo sparkle en el reverso */
+.card-back::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: linear-gradient(115deg,
+            transparent 0%,
+            var(--color1) 25%,
+            transparent 47%,
+            transparent 53%,
+            var(--color2) 75%,
+            transparent 100%);
+    opacity: 0.5;
+    filter: brightness(0.5) contrast(1);
+    z-index: 1;
+}
+
+.card-back::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.75;
+    background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+        url(https://assets.codepen.io/13471/holo.png),
+        linear-gradient(125deg,
+            #ff008450 15%,
+            #fca40040 30%,
+            #ffff0030 40%,
+            #00ff8a20 60%,
+            #00cfff40 70%,
+            #cc4cfa50 85%);
+    background-position: 50% 50%;
+    background-size: cover;
+    background-blend-mode: overlay;
+    z-index: 2;
+    filter: brightness(1) contrast(1);
+    mix-blend-mode: color-dodge;
+    transition: all 0.33s ease;
+}
+
+.card-inner.flip {
+    transform: rotateY(180deg);
+}
+
+.card-inner.flip-twice {
+    transform: rotateY(360deg);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.logo-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    align-self: center;
+    height: 250px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.logo-pokemon img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Efecto holográfico en la cara frontal */
+.card-front::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    opacity: 0.5;
+    filter: brightness(0.5) contrast(1);
+    z-index: 1;
+}
+
+.card-front::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.75;
+    background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+        url(https://assets.codepen.io/13471/holo.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    background-blend-mode: overlay;
+    z-index: 2;
+    filter: brightness(1) contrast(1);
+    mix-blend-mode: color-dodge;
+    transition: all 0.33s ease;
+}
+
+/*Parte trasera de la carta*/
+.card-title {
+    padding: 0;
+    margin: 0;
+    transform: translate(-0%, 110%);
+    font-size: 3vw;
+
+}
+
+.card-gif {
+    padding: 0;
+    margin: 0;
+    height: 90px;
+}
+
+.stat-label {
+    display: inline-block;
+    width: 2px;
+    /* Ajusta según lo que necesites */
+    text-align: left;
+}
+
+.stats-wrap {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.stats-wrap p {
+    margin-right: 8px;
+    min-width: 19px;
+}
+
+.stats-wrap p.stats {
+    padding: 0;
+    text-align: right;
+    padding-right: 8px;
+    min-width: 35px;
+    border-right: 1px solid var(--gray);
+}
+
+.stats-wrap .progress {
+    padding: 0;
+    flex: 1;
+    border-radius: 4px;
+    height: 4px;
+    width: 1vw;
+}
+
+.stats-wrap .progress {
+    border-radius: 4px;
+    width: 1vw;
+}
+
+.progress-block {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    flex-direction: row;
+    gap: 4vw;
+}
+
+.progress-block p {
+    white-space: nowrap;
+}
+
+.progress {
+    appearance: auto;
+    box-sizing: border-box;
+    display: inline-block;
+    block-size: 1em;
+    inline-size: 10em;
+    vertical-align: -0.2em;
+    width: 1vw;
+}
+
+/* Para Chrome, Safari, Edge */
+progress.progressHp::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--hp), var(--hp-grad));
+}
+
+progress.progressAttack::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--atk), var(--atk-grad));
+}
+
+progress.progressDefense::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--def), var(--def-grad));
+}
+
+/* Para Firefox */
+progress.progressHp::-moz-progress-bar {
+    background: var(--hp);
+}
+
+progress.progressAttack::-moz-progress-bar {
+    background: var(--atk);
+}
+
+progress.progressDefense::-moz-progress-bar {
+    background: var(--def);
+}
+
+
+/* Chrome, Safari, Edge */
+progress::-webkit-progress-bar {
+    background: #eee;
+    /* o un gradiente si quieres */
+}
+
+/* Firefox */
+progress {
+    background-color: #eee;
+    width: 7vw;
+}
+
+/*Colores progreso*/
+
+.hp-color {
+    background-color: var(--hp);
+}
+
+.atk-color {
+    background-color: var(--atk);
+}
+
+.def-color {
+    background-color: var(--def);
+}
+
+/* Fondos de tipo */
+.bg-normal {
+    background: url(media/border-yellow.png), linear-gradient(#a8a878, white);
+    background-size: cover;
+}
+
+.bg-fire {
+    background: url(media/border.png), linear-gradient(#f08030, white);
+    background-size: cover;
+}
+
+.bg-water {
+    background: url(media/border-holo.png), linear-gradient(#6890f0, white);
+    background-size: cover;
+}
+
+.bg-grass {
+    background: url(media/border-yellow.png), linear-gradient(#78c850, white);
+    background-size: cover;
+}
+
+.bg-electric {
+    background: url(media/border-holo.png), linear-gradient(#f8d030, white);
+    background-size: cover;
+}
+
+.bg-ice {
+    background: url(media/border-yellow.png), linear-gradient(#98d8d8, white);
+    background-size: cover;
+}
+
+.bg-fighting {
+    background: url(media/border.png), linear-gradient(#c03028, white);
+    background-size: cover;
+}
+
+.bg-poison {
+    background: url(media/border-yellow.png), linear-gradient(#a040a0, white);
+    background-size: cover;
+}
+
+.bg-ground {
+    background: url(media/border-yellow.png), linear-gradient(#e0c068, white);
+    background-size: cover;
+}
+
+.bg-flying {
+    background: url(media/border-holo.png), linear-gradient(#a890f0, white);
+    background-size: cover;
+}
+
+.bg-psychic {
+    background: url(media/border-holo.png), linear-gradient(#f85888, white);
+    background-size: cover;
+}
+
+.bg-bug {
+    background: url(media/border-yellow.png), linear-gradient(#a8b820, white);
+    background-size: cover;
+}
+
+.bg-rock {
+    background: url(media/border.png), linear-gradient(#b8a038, white);
+    background-size: cover;
+}
+
+.bg-ghost {
+    background: url(media/border-holo.png), linear-gradient(#705898, white);
+    background-size: cover;
+}
+
+.bg-dark {
+    background: url(media/border-yellow.png), linear-gradient(#705848, white);
+    background-size: cover;
+}
+
+.bg-dragon {
+    background: url(media/border.png), linear-gradient(#7038f8, white);
+    background-size: cover;
+}
+
+.bg-steel {
+    background: url(media/border-yellow.png), linear-gradient(#b8b8d0, white);
+    background-size: cover;
+}
+
+.bg-fairy {
+    background: url(media/border-holo.png), linear-gradient(#f0b6bc, white);
+    background-size: cover;
+}
+
+
+
+/*colores*/
+.normal {
+    background-color: var(--normal);
+    color: black;
+}
+
+.fire {
+    background-color: var(--fire);
+    color: black;
+}
+
+.water {
+    background-color: var(--water);
+    color: black;
+}
+
+.grass {
+    background-color: var(--grass);
+    color: black;
+}
+
+.electric {
+    background-color: var(--electric);
+    color: black;
+}
+
+.ice {
+    background-color: var(--ice);
+    color: black;
+}
+
+.fighting {
+    background-color: var(--fighting);
+    color: white;
+}
+
+.poison {
+    background-color: var(--poison);
+    color: white;
+}
+
+.ground {
+    background-color: var(--ground);
+    color: black;
+}
+
+.flying {
+    background-color: var(--flying);
+    color: black;
+}
+
+.psychic {
+    background-color: var(--psychic);
+    color: black;
+}
+
+.bug {
+    background-color: var(--bug);
+    color: black;
+}
+
+.rock {
+    background-color: var(--rock);
+    color: black;
+}
+
+.ghost {
+    background-color: var(--ghost);
+    color: white;
+}
+
+.dark {
+    background-color: var(--dark);
+    color: white;
+}
+
+.dragon {
+    background-color: var(--dragon);
+    color: white;
+}
+
+.steel {
+    background-color: var(--steel);
+    color: black;
+}
+
+.fairy {
+    background-color: var(--fairy);
+    color: black;
+}
+
+
+/*colores oscuros*/
+.normal-dark {
+    color: var(--normal-dark);
+
+}
+
+.fire-dark {
+    color: var(--fire-dark);
+}
+
+.water-dark {
+    color: var(--water-dark);
+}
+
+.grass-dark {
+    color: var(--grass-dark);
+}
+
+.electric-dark {
+    color: var(--electric-dark);
+}
+
+.ice-dark {
+    color: var(--ice-dark);
+}
+
+.fighting-dark {
+    color: var(--fighting-dark);
+}
+
+.poison-dark {
+    color: var(--poison-dark);
+}
+
+.ground-dark {
+    color: var(--ground-dark);
+}
+
+.flying-dark {
+    color: var(--flying-dark);
+}
+
+.psychic-dark {
+    color: var(--psychic-dark);
+}
+
+.bug-dark {
+    color: var(--bug-dark);
+}
+
+.rock-dark {
+    color: var(--rock-dark);
+}
+
+.ghost-dark {
+    color: var(--ghost-dark);
+}
+
+.dark-dark {
+    color: var(--dark-dark);
+}
+
+.dragon-dark {
+    color: var(--dragon-dark);
+}
+
+.steel-dark {
+    color: var(--steel-dark);
+}
+
+.fairy-dark {
+    color: var(--fairy-dark);
+}
+
+
+.card-info {
+    font-size: 13px;
+    margin-top: 5px;
+    color: #333;
+    background: #fff;
+    border-radius: 6px;
+    padding: 4px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 50px;
+    padding: 20px 20px;
+    padding-top: 50px;
+    font-size: 1rem;
+}
+
+@keyframes card {
+    from {
+        transform: translateY(100%);
+        opacity: 0.1;
+    }
+
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes holoSparkle {
+
+    0%,
+    100% {
+        opacity: 0.75;
+        background-position: 50% 50%;
+        filter: brightness(1.2) contrast(1.25);
+    }
+
+    5%,
+    8% {
+        opacity: 1;
+        background-position: 40% 40%;
+        filter: brightness(0.8) contrast(1.2);
+    }
+
+    13%,
+    16% {
+        opacity: 0.5;
+        background-position: 50% 50%;
+        filter: brightness(1.2) contrast(0.8);
+    }
+
+    35%,
+    38% {
+        opacity: 1;
+        background-position: 60% 60%;
+        filter: brightness(1) contrast(1);
+    }
+
+    55% {
+        opacity: 0.33;
+        background-position: 45% 45%;
+        filter: brightness(1.2) contrast(1.25);
+    }
+}
+
+@keyframes holoGradient {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        background-position: 50% 50%;
+        filter: brightness(0.5) contrast(1);
+    }
+
+    5%,
+    9% {
+        background-position: 100% 100%;
+        opacity: 1;
+        filter: brightness(0.75) contrast(1.25);
+    }
+
+    13%,
+    17% {
+        background-position: 0% 0%;
+        opacity: 0.88;
+    }
+
+    35%,
+    39% {
+        background-position: 100% 100%;
+        opacity: 1;
+        filter: brightness(0.5) contrast(1);
+    }
+
+    55% {
+        background-position: 0% 0%;
+        opacity: 1;
+        filter: brightness(0.75) contrast(1.25);
+    }
+}
+
+.card-info {
+    font-size: 13px;
+    margin-top: 5px;
+    color: #333;
+    background: #fff;
+    border-radius: 6px;
+    padding: 4px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 10px;
+    min-width: 200px;
+    max-width: 90vw;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+.popup-close-btn {
+    margin-top: 20px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.pixel-button {
+    background-color: var(--atk);
+    border: none;
+    color: var(--atk-grad);
+    padding: 16px 20px;
+    font-family: "VT323", monospace;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    image-rendering: pixelated;
+    transition: all 0.3s;
+}
+
+.pixel-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+}
+
+.pixel-button:hover {
+    transform: scale(1.05);
+    background-color: var(--atk-grad);
+    color: var(--bg-color);
+}
+
+.pixel-button:active {
+    transform: scale(0.95);
+}
+
+.battle-arena {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  z-index: 10000;
+  display: flex;
+  gap: 40px;
+  transform: translate(-50%, -40%);
+  pointer-events: none;
+}
+
+.selected-battle {
+  width: 300px !important;
+  height: 420px !important;
+  transform: rotateY(180eg) scale(2);
+  transition: transform 0.6s cubic-bezier(.4,2,.6,1), width 0.6s, height 0.6s;
+  pointer-events: none;
+}
+
+#popup {
+  position: fixed;
+  left: 50%;
+  top: calc(30% + 250px); /* Ajusta según el tamaño de tus cartas */
+  transform: translateX(-50%);
+  z-index: 10001;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.popup-text {
+  color: var(--bg-color);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}

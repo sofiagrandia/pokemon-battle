@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon Battle</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+</head>
+<header>
+    <img src="./media/logo.png" alt="Logo Pokemon" class="logo-pokemon">
+</header>
+
+<body>
+    <h1>THE CARD GAME</h1>
+    <p id="status">Choose player mode</p>
+
+    <select id="gameMode">
+        <option value="multiplayer">Multiplayer</option>
+        <option value="cpu">Single player</option>
+    </select>
+
+    <div class="players">
+        <div class="player">
+            <h2 id="p1Title">PLAYER 1</h2>
+            <div id="player1" class="deck"></div>
+        </div>
+        <div class="player">
+            <h2 id="p2Title">PLAYER 2</h2>
+            <div id="player2" class="deck"></div>
+        </div>
+    </div>
+    <button id="startBtn" class="pixel-button">DEAL CARDS</button>
+
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <div id="popup-message" class="popup-text"></div>
+            <button id="popup-close" class="popup-close-btn pixel-button">CLOSE</button>
+
+        </div>
+    </div>
+
+    <div id="game-popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <div id="popup-message" class="popup-text popup-game"></div>
+            <button id="popup-close" class="popup-close-btn pixel-button">CLOSE</button>
+
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
